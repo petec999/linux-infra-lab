@@ -1,0 +1,24 @@
+---
+- name: Collect Linux system information
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Display OS information
+      ansible.builtin.debug:
+        msg: >-
+          {{ ansible_facts['distribution'] }}
+          {{ ansible_facts['distribution_version'] }}
+          - Kernel {{ ansible_facts['kernel'] }}
+
+    - name: Create system report
+      ansible.builtin.copy:
+        dest: "{{ ansible_env.HOME }}/system-report.txt"
+        mode: '0644'
+        content: |
+          Host: {{ ansible_facts['hostname'] }}
+          OS: {{ ansible_facts['distribution'] }}
+          Version: {{ ansible_facts['distribution_version'] }}
+          Kernel: {{ ansible_facts['kernel'] }}
+          RAM: {{ ansible_facts['memtotal_mb'] }} MB
