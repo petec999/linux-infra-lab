@@ -1,0 +1,17 @@
+---
+- name: Audit Linux services
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Collect system services
+      ansible.builtin.service_facts:
+
+    - name: Check SSH service
+      ansible.builtin.debug:
+        msg: "SSH status: {{ ansible_facts.services['sshd.service'].state | default('not found') }}"
+
+    - name: Check NetworkManager
+      ansible.builtin.debug:
+        msg: "Network status: {{ ansible_facts.services['NetworkManager.service'].state | default('not found') }}"
