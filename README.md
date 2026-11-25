@@ -26,6 +26,14 @@ Run:
 
     ansible-playbook -i localhost, playbooks/system-info.yml
 
+### Linux Service Audit
+
+Read-only inspection of systemd services using Ansible service facts. Reports SSH and NetworkManager state without changing either service.
+
+```bash
+ansible-playbook -i localhost, playbooks/service-audit.yml
+```
+
 ## Project Structure
 
 - playbooks/ - Ansible automation playbooks
@@ -34,16 +42,13 @@ Run:
 
 - [x] Ansible system facts collection
 - [ ] Ansible roles and inventory
+- [x] Linux service audit
 - [ ] Linux service management
 - [ ] Docker containers
 - [ ] CI/CD pipelines
 - [ ] Infrastructure monitoring
 - [ ] Terraform
 - [ ] Kubernetes
-
-## Related Project
-
-OpenMind AI - AI-powered Linux infrastructure diagnostics.
 
 ## Author
 
