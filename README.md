@@ -1,55 +1,37 @@
 # Linux Infrastructure Lab
 
-Hands-on Linux infrastructure and DevOps engineering lab.
+Hands-on infrastructure automation lab using Rocky Linux and Ansible.
 
 ## Environment
 
-- Rocky Linux 10.1
-- Oracle VirtualBox
-- Python 3.12
-- Ansible Core
-- Git
+Rocky Linux 10.1 in VirtualBox, Ansible Core, Python and Git. The exercises run locally with an explicit localhost inventory.
 
-## Current Features
+## Implemented
 
-### System Information Playbook
-
-Collects Linux system information using Ansible facts.
-
-Reports:
-- Hostname
-- OS distribution and version
-- Kernel version
-- Available system memory
-
-Run:
-
-    ansible-playbook -i localhost, playbooks/system-info.yml
-
-### Linux Service Audit
-
-Read-only inspection of systemd services using Ansible service facts. Reports SSH and NetworkManager state without changing either service.
+| Playbook | Purpose | Effect |
+| --- | --- | --- |
+| [system-info.yml](playbooks/system-info.yml) | Hostname, OS, kernel and memory facts | Writes `~/system-report.txt` |
+| [service-audit.yml](playbooks/service-audit.yml) | Inspect SSH and NetworkManager systemd services | Read-only |
 
 ```bash
+ansible-playbook -i localhost, playbooks/system-info.yml
 ansible-playbook -i localhost, playbooks/service-audit.yml
 ```
 
-## Project Structure
+Check syntax before executing:
 
-- playbooks/ - Ansible automation playbooks
+```bash
+ansible-playbook -i localhost, --syntax-check playbooks/system-info.yml
+ansible-playbook -i localhost, --syntax-check playbooks/service-audit.yml
+```
 
-## Roadmap
+## Learning roadmap
 
-- [x] Ansible system facts collection
-- [ ] Ansible roles and inventory
-- [x] Linux service audit
-- [ ] Linux service management
-- [ ] Docker containers
-- [ ] CI/CD pipelines
-- [ ] Infrastructure monitoring
-- [ ] Terraform
-- [ ] Kubernetes
+- [x] Ansible facts and local reporting
+- [x] Service inventory and audit
+- [ ] Variables, templates and roles
+- [ ] Idempotent service configuration
+- [ ] Containers and CI/CD
+- [ ] Monitoring, Terraform and Kubernetes
 
-## Author
-
-Independent Linux / Infrastructure / Platform Engineering lab.
+This repository is a personal learning lab, not a production platform. Only committed exercises are described as implemented. Never commit secrets, machine-specific reports or private inventory data.
